@@ -9,40 +9,6 @@
   overflow-y: auto;
 }
 
-.app-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 20px;
-  width: 100%;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-  flex-shrink: 0;
-
-  .logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-  }
-
-  .logo-icon {
-    width: min(300px, 60vw);
-    height: min(300px, 60vw);
-    object-fit: contain;
-    max-width: 100%;
-  }
-
-  .app-title {
-    color: white;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 0;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-  }
-}
-
 .tab-nav {
   display: flex;
   width: 100%;
@@ -136,19 +102,6 @@
 
 // Responsive adjustments
 @media (max-width: 480px) {
-  .app-header {
-    padding: 16px;
-
-    .app-title {
-      font-size: 1.25rem;
-    }
-
-    .logo-icon {
-      width: min(256px, 70vw);
-      height: min(256px, 70vw);
-    }
-  }
-
   .tab-nav {
     .tab-btn {
       padding: 14px 8px;

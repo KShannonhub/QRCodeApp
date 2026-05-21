@@ -113,9 +113,24 @@
   text-align: center;
   font-size: 0.85rem;
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 
   p {
     margin: 0;
+  }
+
+  .donation-btn {
+    height: 60px;
+    width: 217px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 }
 

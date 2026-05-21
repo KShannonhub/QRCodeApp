@@ -167,4 +167,23 @@ export class QrGeneratorComponent implements OnInit {
       this.history = [];
     }
   }
+
+  clearForm(): void {
+    this.inputText = '';
+    this.qrCodeDataUrl = '';
+    this.errorMessage = '';
+    this.wifiSsid = '';
+    this.wifiPassword = '';
+    this.wifiEncryption = 'WPA';
+    this.wifiHidden = false;
+    this.emailTo = '';
+    this.emailSubject = '';
+    this.emailBody = '';
+    this.phoneNumber = '';
+    this.inputType = 'text';
+    this.fgColor = '#000000';
+    this.bgColor = '#FFFFFF';
+    this.size = 256;
+    this.margin = 2;
+  }
 }

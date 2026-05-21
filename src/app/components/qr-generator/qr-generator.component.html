@@ -89,20 +89,27 @@
         <input type="color" id="bgColor" [(ngModel)]="bgColor">
       </div>
       <div class="input-group">
-        <label for="size">Size: {{size}}px</label>
+        <label for="size">Output Size: {{size}}px {{size <= 256 ? '(Standard)' : '(High Resolution)'}}</label>
         <input type="range" id="size" [(ngModel)]="size" min="128" max="512" step="64">
+        <small class="slider-hint">Controls the pixel dimensions of the generated QR code image. Larger sizes are better for printing.</small>
       </div>
       <div class="input-group">
-        <label for="margin">Margin: {{margin}}</label>
+        <label for="margin">Quiet Zone: {{margin > 0 ? margin + ' modules' : 'None'}}</label>
         <input type="range" id="margin" [(ngModel)]="margin" min="0" max="5" step="1">
+        <small class="slider-hint">The white border around the QR code. Most scanners need at least 1-2 modules for reliable scanning.</small>
       </div>
     </div>
   </div>
 
-  <!-- Generate Button -->
-  <button class="generate-btn" (click)="generateQRCode()" [disabled]="isGenerating">
-    {{ isGenerating ? 'Generating...' : 'Generate QR Code' }}
-  </button>
+  <!-- Action Buttons -->
+  <div class="action-buttons-row">
+    <button class="generate-btn" (click)="generateQRCode()" [disabled]="isGenerating">
+      {{ isGenerating ? 'Generating...' : 'Generate QR Code' }}
+    </button>
+    <button class="clear-btn" (click)="clearForm()">
+      Clear
+    </button>
+  </div>
 
   <!-- Error Message -->
   <div *ngIf="errorMessage" class="error-message">
@@ -124,24 +131,4 @@
     </div>
   </div>
 
-  <!-- History Section -->
-  <div *ngIf="history.length > 0" class="history-section">
-    <div class="history-header">
-      <h3>History</h3>
-      <button (click)="clearAllHistory()" class="clear-btn">Clear All</button>
-    </div>
-    <div class="history-list">
-      <div *ngFor="let item of history" class="history-item">
-        <div class="history-info">
-          <span class="history-type">{{ item.type | titlecase }}</span>
-          <span class="history-text">{{ item.text | slice:0:50 }}{{ item.text.length > 50 ? '...' : '' }}</span>
-          <span class="history-date">{{ item.timestamp | date:'short' }}</span>
-        </div>
-        <div class="history-actions">
-          <button (click)="loadFromHistory(item)" class="small-btn">Load</button>
-          <button (click)="deleteHistoryItem(item.id)" class="small-btn delete">Delete</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

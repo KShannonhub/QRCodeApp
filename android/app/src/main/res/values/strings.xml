@@ -3,5 +3,5 @@
     <string name="app_name">Cubey Scans</string>
     <string name="title_activity_main">Cubey Scans</string>
     <string name="package_name">com.cubeyscans.app</string>
-    <string name="custom_url_scheme">com.qrcode.app</string>
+    <string name="custom_url_scheme">com.cubeyscans.app</string>
 </resources>

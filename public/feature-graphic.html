@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cubey Scans - Feature Graphic</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #1a1a2e;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    .feature-graphic {
+      width: 1024px;
+      height: 500px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* Background pattern */
+    .feature-graphic::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    
+    .logo-container {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .logo-icon {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));
+    }
+    
+    .app-title {
+      color: white;
+      font-size: 64px;
+      font-weight: 700;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .app-subtitle {
+      color: rgba(255,255,255,0.9);
+      font-size: 24px;
+      font-weight: 400;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Decorative cube elements */
+    .cube-decoration {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border: 3px solid rgba(255,255,255,0.2);
+      transform: rotate(45deg);
+    }
+    
+    .cube-1 { top: 40px; left: 60px; }
+    .cube-2 { top: 80px; right: 100px; width: 40px; height: 40px; }
+    .cube-3 { bottom: 60px; left: 120px; width: 50px; height: 50px; }
+    .cube-4 { bottom: 40px; right: 60px; width: 45px; height: 45px; }
+  </style>
+</head>
+<body>
+  <div class="feature-graphic">
+    <div class="cube-decoration cube-1"></div>
+    <div class="cube-decoration cube-2"></div>
+    <div class="cube-decoration cube-3"></div>
+    <div class="cube-decoration cube-4"></div>
+    
+    <div class="logo-container">
+      <img src="header-icon.png" alt="Cubey Scans Logo" class="logo-icon">
+    </div>
+    
+    <h1 class="app-title">Cubey Scans</h1>
+    <p class="app-subtitle">QR Code Scanner & Generator</p>
+  </div>
+  
+  <script>
+    // Instructions for user
+    console.log('%c Feature Graphic Instructions ', 'background: #667eea; color: white; font-size: 20px; padding: 10px;');
+    console.log('1. Open this page in a browser');
+    console.log('2. The graphic is exactly 1024x500 pixels');
+    console.log('3. Take a screenshot or use a tool like Snipping Tool');
+    console.log('4. Save as PNG for Google Play Store');
+    console.log('');
+    console.log('Or use an online tool like htmlcsstoimage.com to convert this to PNG');
+  </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<div class="qr-scanner">
+  <h2>Scan QR Code</h2>
+
+  <!-- Permission Error -->
+  <div *ngIf="!hasPermission && !isScanning" class="permission-error">
+    <div class="error-icon">📷</div>
+    <p>{{ errorMessage || 'Camera access is required to scan QR codes.' }}</p>
+    <button (click)="checkCameraPermission()" class="retry-btn">
+      Request Camera Access
+    </button>
+  </div>
+
+  <!-- Scanner View -->
+  <div *ngIf="hasPermission && !isScanning && !scannedResult" class="scanner-setup">
+    <div class="camera-select">
+      <label for="camera">Select Camera:</label>
+      <select id="camera" [(ngModel)]="selectedCamera" *ngIf="cameras.length > 1">
+        <option *ngFor="let camera of cameras" [value]="camera.id">
+          {{ camera.label }}
+        </option>
+      </select>
+    </div>
+    <button (click)="startScanning()" class="start-scan-btn">
+      <span class="scan-icon">📱</span>
+      Start Scanning
+    </button>
+  </div>
+
+  <!-- Active Scanner -->
+  <div *ngIf="isScanning" class="scanner-active">
+    <div id="reader" #reader class="reader-container"></div>
+    <button (click)="stopScanning()" class="stop-btn">
+      Stop Scanning
+    </button>
+  </div>
+
+  <!-- Scanned Result -->
+  <div *ngIf="scannedResult" class="scan-result">
+    <div class="result-icon">✅</div>
+    <h3>QR Code Scanned!</h3>
+    <div class="result-content">
+      <div class="result-type">
+        Type: <strong>{{ getResultType() }}</strong>
+      </div>
+      <div class="result-text">
+        <label>Content:</label>
+        <p>{{ scannedResult }}</p>
+      </div>
+    </div>
+    <div class="result-actions">
+      <button (click)="copyToClipboard()" class="action-btn">
+        <span>📋</span> Copy
+      </button>
+      <button *ngIf="isUrl()" (click)="openLink()" class="action-btn primary">
+        <span>🔗</span> Open Link
+      </button>
+      <button (click="scanAgain()" class="action-btn">
+        <span>🔄</span> Scan Again
+      </button>
+    </div>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage && !isScanning" class="error-message">
+    {{ errorMessage }}
+  </div>
+</div>

@@ -1,0 +1,147 @@
+<div class="qr-generator">
+  <h2>Generate QR Code</h2>
+  
+  <!-- Input Type Selector -->
+  <div class="input-type-selector">
+    <label>Content Type:</label>
+    <div class="type-buttons">
+      <button 
+        *ngFor="let type of types"
+        [class.active]="inputType === type"
+        (click)="setInputType(type)">
+        {{ type | titlecase }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Dynamic Input Fields Based on Type -->
+  <div class="input-section">
+    <!-- Text/URL Input -->
+    <div *ngIf="inputType === 'text' || inputType === 'url'" class="input-group">
+      <label for="inputText">{{ inputType === 'url' ? 'URL' : 'Text' }}</label>
+      <textarea 
+        id="inputText"
+        [(ngModel)]="inputText"
+        (input)="detectInputType()"
+        placeholder="{{ inputType === 'url' ? 'https://example.com' : 'Enter your text here...' }}"
+        rows="3"></textarea>
+    </div>
+
+    <!-- WiFi Input -->
+    <div *ngIf="inputType === 'wifi'" class="wifi-input">
+      <div class="input-group">
+        <label for="wifiSsid">Network Name (SSID)</label>
+        <input type="text" id="wifiSsid" [(ngModel)]="wifiSsid" placeholder="My WiFi Network">
+      </div>
+      <div class="input-group">
+        <label for="wifiPassword">Password</label>
+        <input type="text" id="wifiPassword" [(ngModel)]="wifiPassword" placeholder="Password">
+      </div>
+      <div class="input-group">
+        <label for="wifiEncryption">Encryption</label>
+        <select id="wifiEncryption" [(ngModel)]="wifiEncryption">
+          <option value="WPA">WPA/WPA2</option>
+          <option value="WEP">WEP</option>
+          <option value="nopass">None</option>
+        </select>
+      </div>
+      <div class="input-group checkbox-group">
+        <input type="checkbox" id="wifiHidden" [(ngModel)]="wifiHidden">
+        <label for="wifiHidden">Hidden Network</label>
+      </div>
+    </div>
+
+    <!-- Email Input -->
+    <div *ngIf="inputType === 'email'" class="email-input">
+      <div class="input-group">
+        <label for="emailTo">To</label>
+        <input type="email" id="emailTo" [(ngModel)]="emailTo" placeholder="email@example.com">
+      </div>
+      <div class="input-group">
+        <label for="emailSubject">Subject</label>
+        <input type="text" id="emailSubject" [(ngModel)]="emailSubject" placeholder="Email Subject">
+      </div>
+      <div class="input-group">
+        <label for="emailBody">Body</label>
+        <textarea id="emailBody" [(ngModel)]="emailBody" placeholder="Email body text..." rows="3"></textarea>
+      </div>
+    </div>
+
+    <!-- Phone Input -->
+    <div *ngIf="inputType === 'phone'" class="phone-input">
+      <div class="input-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="tel" id="phoneNumber" [(ngModel)]="phoneNumber" placeholder="+1 234 567 8900">
+      </div>
+    </div>
+  </div>
+
+  <!-- Customization Options -->
+  <div class="customization-section">
+    <h3>Customize</h3>
+    <div class="customization-grid">
+      <div class="input-group">
+        <label for="fgColor">Foreground Color</label>
+        <input type="color" id="fgColor" [(ngModel)]="fgColor">
+      </div>
+      <div class="input-group">
+        <label for="bgColor">Background Color</label>
+        <input type="color" id="bgColor" [(ngModel)]="bgColor">
+      </div>
+      <div class="input-group">
+        <label for="size">Size: {{size}}px</label>
+        <input type="range" id="size" [(ngModel)]="size" min="128" max="512" step="64">
+      </div>
+      <div class="input-group">
+        <label for="margin">Margin: {{margin}}</label>
+        <input type="range" id="margin" [(ngModel)]="margin" min="0" max="5" step="1">
+      </div>
+    </div>
+  </div>
+
+  <!-- Generate Button -->
+  <button class="generate-btn" (click)="generateQRCode()" [disabled]="isGenerating">
+    {{ isGenerating ? 'Generating...' : 'Generate QR Code' }}
+  </button>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- QR Code Display -->
+  <div *ngIf="qrCodeDataUrl" class="qr-result">
+    <div class="qr-code-container">
+      <img [src]="qrCodeDataUrl" alt="Generated QR Code" class="qr-code-image">
+    </div>
+    <div class="action-buttons">
+      <button (click)="downloadQRCode()" class="action-btn">
+        <span>⬇</span> Download
+      </button>
+      <button (click)="copyToClipboard()" class="action-btn">
+        <span>📋</span> Copy Text
+      </button>
+    </div>
+  </div>
+
+  <!-- History Section -->
+  <div *ngIf="history.length > 0" class="history-section">
+    <div class="history-header">
+      <h3>History</h3>
+      <button (click)="clearAllHistory()" class="clear-btn">Clear All</button>
+    </div>
+    <div class="history-list">
+      <div *ngFor="let item of history" class="history-item">
+        <div class="history-info">
+          <span class="history-type">{{ item.type | titlecase }}</span>
+          <span class="history-text">{{ item.text | slice:0:50 }}{{ item.text.length > 50 ? '...' : '' }}</span>
+          <span class="history-date">{{ item.timestamp | date:'short' }}</span>
+        </div>
+        <div class="history-actions">
+          <button (click)="loadFromHistory(item)" class="small-btn">Load</button>
+          <button (click)="deleteHistoryItem(item.id)" class="small-btn delete">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Cubey Scans</string>
+    <string name="title_activity_main">Cubey Scans</string>
+    <string name="package_name">com.cubeyscans.app</string>
+    <string name="custom_url_scheme">com.qrcode.app</string>
+</resources>

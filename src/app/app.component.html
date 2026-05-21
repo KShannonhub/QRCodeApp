@@ -1,0 +1,34 @@
+<div class="app-container">
+  <header class="app-header">
+    <div class="logo">
+      <img src="header-icon.png" alt="Cubey Scans Logo" class="logo-icon">
+      <h1 class="app-title">Cubey Scans</h1>
+    </div>
+  </header>
+
+  <nav class="tab-nav">
+    <button 
+      [class.active]="activeTab === 'generate'"
+      (click)="switchTab('generate')"
+      class="tab-btn">
+      <span class="tab-icon">✨</span>
+      Generate
+    </button>
+    <button 
+      [class.active]="activeTab === 'scan'"
+      (click)="switchTab('scan')"
+      class="tab-btn">
+      <span class="tab-icon">📷</span>
+      Scan
+    </button>
+  </nav>
+
+  <main class="app-main">
+    <app-qr-generator *ngIf="activeTab === 'generate'"></app-qr-generator>
+    <app-qr-scanner *ngIf="activeTab === 'scan'"></app-qr-scanner>
+  </main>
+
+  <footer class="app-footer">
+    <p>&copy; 2026 Cubey Scans. All rights reserved.</p>
+  </footer>
+</div>
